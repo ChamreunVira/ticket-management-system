@@ -1,4 +1,4 @@
-package entity;
+package com.kh.vira_dev.userservice.entity;
 
 import com.kh.vira_dev.commonutils.entity.BaseEntity;
 import jakarta.persistence.*;
@@ -59,9 +59,9 @@ public class User extends BaseEntity {
 
     private String status;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_role",
+            name = "tbl_user_role",
             joinColumns = @JoinColumn(name = "user_id" , referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id" , referencedColumnName = "id")
     )

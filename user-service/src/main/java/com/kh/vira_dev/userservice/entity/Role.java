@@ -1,5 +1,6 @@
-package entity;
+package com.kh.vira_dev.userservice.entity;
 
+import com.kh.vira_dev.commonutils.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Table(name = "tbl_role")
 @Getter
 @Setter
-public class Role {
+public class Role extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +30,15 @@ public class Role {
     @ManyToMany(mappedBy = "roles" , fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "role_permission",
+            name = "tbl_role_permission",
             joinColumns = @JoinColumn(name = "role_id" , referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id" , referencedColumnName = "id")
     )
     private Set<Permission> permissions = new HashSet<>();
+
+    @ManyToMany(mappedBy = "roles" , fetch = FetchType.LAZY)
+    private Set<Group> groups = new HashSet<>();
+
 }
