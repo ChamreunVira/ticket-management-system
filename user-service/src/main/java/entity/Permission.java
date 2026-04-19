@@ -17,6 +17,8 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String test;
+
     @Column(name = "name")
     private String name;
 
